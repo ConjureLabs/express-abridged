@@ -6,24 +6,17 @@ module.exports = ({
   // dir in which base routes live in
   routesDir = path.resolve(__dirname, '../../../routes'),
   // port for express
-  port,
+  port = 3000,
   // takes in express server, can be used to apply additional .use
-  serverAfterConfig = server => {},
+  serverAfterConfig = (server, express) => {},
   // takes in express server, can be used to apply additional .use
-  serverAfterRoutes = server => {},
+  serverAfterRoutes = (server, express) => {},
   // run just before starting server
-  beforeListen = next => next(),
+  beforeListen = (server, express, done) => done(),
   // run just after starting server
-  afterListen = () => {}
+  afterListen = (server, express) => {}
 }) => {
   require('@conjurelabs/utils/process/handle-exceptions')
-
-  if (routesDir == null) {
-    throw new Error(`No routesDir given for ${name}`)
-  }
-  if (port == null) {
-    throw new Error(`No port given for ${name}`)
-  }
 
   // routes crawling is sync - this is okay if run at startup
   const crawlRoutes = require('@conjurelabs/route/sync-crawl')
@@ -33,7 +26,6 @@ module.exports = ({
   const express = require('express')
   const compression = require('compression')
   const morgan = require('morgan')
-  const cookieSession = require('cookie-session')
   const bodyParser = require('body-parser')
   const cookieParser = require('cookie-parser')
 
@@ -55,7 +47,7 @@ module.exports = ({
   server.use(bodyParser.json())
   server.use(cookieParser())
 
-  serverAfterConfig(server)
+  serverAfterConfig(server, express)
 
   // todo: merge in base serve routes (like /aws/ping)
   // if (config.app.protocol === 'https') {
@@ -86,13 +78,13 @@ module.exports = ({
   }
   server.use(routes)
 
-  serverAfterRoutes(server)
+  serverAfterRoutes(server, express)
 
   // starting server
-  beforeListen(() => {
+  beforeListen(server, express, () => {
     server.listen(port, () => {
       console.info(`${name} available on :${port}`)
-      afterListen()
+      afterListen(server, express)
     })
   })
 }
