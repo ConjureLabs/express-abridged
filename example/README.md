@@ -10,4 +10,4 @@ then
 
 `npm run`
 
-Once running, you should be able to go to <localhost:4000>
+Once running, you should be able to go to <http://localhost:4000>
