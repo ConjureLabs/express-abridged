@@ -1,8 +1,10 @@
+const path = require('path')
+
 module.exports = ({
   // name of server, useful for logging
   name = 'Server',
   // dir in which base routes live in
-  routesDir,
+  routesDir = path.resolve(__dirname, '../../../routes'),
   // port for express
   port,
   // takes in express server, can be used to apply additional .use
