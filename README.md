@@ -38,7 +38,7 @@ module.exports = route
 // this will allow a user to GET /test on the running server
 ```
 
-See [the example usage](https://github.com/ConjureLabs/mode/tree/master/example) for a working example.
+See [a working example](https://github.com/ConjureLabs/mode/tree/master/example).
 
 ## Advanced Usage
 
