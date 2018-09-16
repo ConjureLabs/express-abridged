@@ -21,7 +21,7 @@ This will run an Express sever on `:3000`
 
 See [the route module documenation](https://github.com/ConjureLabs/route#readme) for more deatils on using routes.
 
-Routes within a `mode` server can access the `route` module.
+Routes within a `mode` server can access the `route` module via `@conjurelabs/mode/route`.
 
 ```js
 // within './routes/test/get.js'
