@@ -5,7 +5,7 @@ Quick setup scaffolding for an Express server
 ## Install
 
 ```sh
-npm -i --save mode
+npm -i --save @conjurelabs/mode
 ```
 
 ## Usage
