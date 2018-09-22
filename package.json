@@ -10,6 +10,10 @@
   "repository": "ConjureLabs/mode",
   "bugs": "https://github.com/ConjureLabs/mode/issues",
   "homepage": "https://github.com/ConjureLabs/mode#readme",
+  "files": [
+    "index.js",
+    "route.js"
+  ],
   "dependencies": {
     "@conjurelabs/route": "^0.3.2",
     "@conjurelabs/utils": "^0.1.0",
