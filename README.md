@@ -86,23 +86,6 @@ mode({
 })
 ```
 
-### Appending dynamic routes
-
-You may want to add more than what's in your routes directory.
-
-```js
-mode({
-  serverAfterRoutes: (server, express) => {
-    const robotsRouter = express.Router()
-    robotsRouter.get('/robots.txt', (req, res) => {
-      res.set('Content-Type', 'text/plain')
-      res.send(['User-agent: *', 'Disallow: /admin'].join('\n'))
-    })
-    server.use(robotsRouter)
-  }
-})
-```
-
 ### Before server starts
 
 This is useful for wrapping `.listen` with additional logic, like when wrapping Express in a [Next](https://github.com/zeit/next.js#readme) app.

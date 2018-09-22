@@ -9,8 +9,6 @@ module.exports = ({
   port = 3000,
   // takes in express server, can be used to apply additional .use
   serverAfterConfig = (server, express) => {},
-  // takes in express server, can be used to apply additional .use
-  serverAfterRoutes = (server, express) => {},
   // run just before starting server
   beforeListen = (server, express, done) => done(),
   // run just after starting server
@@ -77,8 +75,6 @@ module.exports = ({
     throw new Error(`No routes given for ${name}`)
   }
   server.use(routes)
-
-  serverAfterRoutes(server, express)
 
   // starting server
   beforeListen(server, express, () => {
