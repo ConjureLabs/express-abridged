@@ -15,7 +15,7 @@
     "route.js"
   ],
   "dependencies": {
-    "@conjurelabs/route": "^0.3.2",
+    "@conjurelabs/route": "^0.4.0",
     "@conjurelabs/utils": "^0.1.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
