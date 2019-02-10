@@ -22,7 +22,7 @@
     "morgan": "^1.9.1"
   },
   "peerDependencies": {
-    "@conjurelabs/route": "0.x.x",
+    "@conjurelabs/route": "1.x.x",
     "@conjurelabs/utils": "0.x.x"
   }
 }
