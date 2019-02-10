@@ -1,6 +1,6 @@
 {
   "name": "@conjurelabs/mode",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "express server scaffolding",
   "main": "index.js",
   "scripts": {
