@@ -18,16 +18,13 @@ module.exports = ({
 }) => {
   require('@conjurelabs/utils/process/handle-exceptions')
 
-  // routes crawling is sync - this is okay if run at startup
-  const crawlRoutes = require('@conjurelabs/route/sync-crawl')
-  const routes = withRoutes ? crawlRoutes(routesDir) : null
-
   // base dependencies
   const express = require('express')
   const compression = require('compression')
   const morgan = require('morgan')
   const bodyParser = require('body-parser')
   const cookieParser = require('cookie-parser')
+  const helmet = require('helmet')
 
   const server = express()
 
@@ -37,6 +34,7 @@ module.exports = ({
   }
 
   // basic server config
+  server.use(helmet())
   server.use(compression())
   server.set('port', port)
   server.use(morgan('combined'))
@@ -59,6 +57,10 @@ module.exports = ({
 
   // initialize routes
   if (withRoutes) {
+    // routes crawling is sync - this is okay if run at startup
+    const crawlRoutes = require('@conjurelabs/route/sync-crawl')
+    const routes = crawlRoutes(routesDir)
+
     if (!routes.length) {
       throw new Error(`No routes given for ${name}`)
     }
