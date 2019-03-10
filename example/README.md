@@ -1,6 +1,6 @@
 # Example
 
-This is a very basic example of using `mode` with a routes directory.
+This is a very basic example of using `abridged` with a routes directory.
 
 ## Setup
 

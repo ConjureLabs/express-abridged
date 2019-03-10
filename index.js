@@ -4,7 +4,7 @@ module.exports = ({
   // name of server, useful for logging
   name = 'Server',
   // if false, then no route crawling will happen
-  withRoutes = true,
+  crawlRoutes = true,
   // dir in which base routes live in
   routesDir = path.resolve(__dirname, '../../../routes'),
   // port for express
@@ -56,10 +56,10 @@ module.exports = ({
   })
 
   // initialize routes
-  if (withRoutes) {
+  if (crawlRoutes) {
     // routes crawling is sync - this is okay if run at startup
-    const crawlRoutes = require('@conjurelabs/route/sync-crawl')
-    const routes = crawlRoutes(routesDir)
+    const syncCrawl = require('@conjurelabs/route/sync-crawl')
+    const routes = syncCrawl(routesDir)
 
     if (!routes.length) {
       throw new Error(`No routes given for ${name}`)

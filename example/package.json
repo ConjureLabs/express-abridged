@@ -1,5 +1,5 @@
 {
-  "name": "mode-example",
+  "name": "abridged-example",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
@@ -7,6 +7,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@conjurelabs/mode": "*"
+    "@conjurelabs/express-abridged": "*"
   }
 }
