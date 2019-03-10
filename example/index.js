@@ -1,6 +1,6 @@
-const mode = require('@conjurelabs/mode')
+const abridged = require('@conjurelabs/express-abridged')
 
-mode({
+abridged({
   name: 'Example',
   port: 4000
 })

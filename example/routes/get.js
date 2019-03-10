@@ -1,4 +1,4 @@
-const Route = require('@conjurelabs/mode/route')
+const Route = require('@conjurelabs/express-abridged/route')
 
 const route = new Route()
 
