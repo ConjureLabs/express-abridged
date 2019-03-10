@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
-  "repository": "ConjureLabs/mode",
-  "bugs": "https://github.com/ConjureLabs/mode/issues",
-  "homepage": "https://github.com/ConjureLabs/mode#readme",
+  "repository": "ConjureLabs/express-abridged",
+  "bugs": "https://github.com/ConjureLabs/express-abridged/issues",
+  "homepage": "https://github.com/ConjureLabs/express-abridged#readme",
   "files": [
     "index.js",
     "route.js"
