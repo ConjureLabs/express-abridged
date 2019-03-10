@@ -3,6 +3,8 @@ const path = require('path')
 module.exports = ({
   // name of server, useful for logging
   name = 'Server',
+  // if false, then no route crawling will happen
+  withRoutes = true,
   // dir in which base routes live in
   routesDir = path.resolve(__dirname, '../../../routes'),
   // port for express
@@ -16,16 +18,13 @@ module.exports = ({
 }) => {
   require('@conjurelabs/utils/process/handle-exceptions')
 
-  // routes crawling is sync - this is okay if run at startup
-  const crawlRoutes = require('@conjurelabs/route/sync-crawl')
-  const routes = crawlRoutes(routesDir)
-
   // base dependencies
   const express = require('express')
   const compression = require('compression')
   const morgan = require('morgan')
   const bodyParser = require('body-parser')
   const cookieParser = require('cookie-parser')
+  const helmet = require('helmet')
 
   const server = express()
 
@@ -35,6 +34,7 @@ module.exports = ({
   }
 
   // basic server config
+  server.use(helmet())
   server.use(compression())
   server.set('port', port)
   server.use(morgan('combined'))
@@ -47,21 +47,6 @@ module.exports = ({
 
   serverAfterConfig(server, express)
 
-  // todo: merge in base serve routes (like /aws/ping)
-  // if (config.app.protocol === 'https') {
-  //   const forcedHttpsRouter = express.Router()
-  //   forcedHttpsRouter.get('*', (req, res, next) => {
-  //     if (req.url === '/aws/ping' && req.headers['user-agent'] === 'ELB-HealthChecker/2.0') {
-  //       return next()
-  //     }
-  //     if (req.headers && req.headers['x-forwarded-proto'] === 'https') {
-  //       return next()
-  //     }
-  //     res.redirect(`${config.app.url}${req.url}`)
-  //   })
-  //   server.use(forcedHttpsRouter)
-  // }
-
   // tracking req attributes (like ip address)
   server.use((req, res, next) => {
     req.attributes = {} // used to track anything useful, along the lifetime of a request
@@ -71,10 +56,16 @@ module.exports = ({
   })
 
   // initialize routes
-  if (!routes.length) {
-    throw new Error(`No routes given for ${name}`)
+  if (withRoutes) {
+    // routes crawling is sync - this is okay if run at startup
+    const crawlRoutes = require('@conjurelabs/route/sync-crawl')
+    const routes = crawlRoutes(routesDir)
+
+    if (!routes.length) {
+      throw new Error(`No routes given for ${name}`)
+    }
+    server.use(routes)
   }
-  server.use(routes)
 
   // starting server
   beforeListen(server, express, () => {
