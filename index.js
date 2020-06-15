@@ -14,7 +14,11 @@ module.exports = ({
   // run just before starting server
   beforeListen = (server, express, done) => done(),
   // run just after starting server
-  afterListen = (server, express) => {}
+  afterListen = (server, express) => {},
+  // config passed into bodyParser.urlencoded()
+  bodyParserUrlEncodedConfig = { extended: true },
+  // config passed into bodyParser.json()
+  bodyParserJsonConfig = {}
 }) => {
   require('@conjurelabs/utils/process/handle-exceptions')
 
@@ -39,10 +43,8 @@ module.exports = ({
   server.set('port', port)
   server.use(morgan('combined'))
 
-  server.use(bodyParser.urlencoded({
-    extended: true
-  }))
-  server.use(bodyParser.json())
+  server.use(bodyParser.urlencoded(bodyParserUrlEncodedConfig))
+  server.use(bodyParser.json(bodyParserJsonConfig))
   server.use(cookieParser())
 
   serverAfterConfig(server, express)
