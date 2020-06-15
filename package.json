@@ -1,6 +1,6 @@
 {
   "name": "@conjurelabs/express-abridged",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0",
   "description": "express server scaffolding",
   "main": "index.js",
   "scripts": {
